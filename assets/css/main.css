@@ -964,6 +964,8 @@ input, select, textarea {
 	td.but {
 		table-layout: fixed;
 		width: 7rem;
+		cellspacing: 0;
+		text-align: left;
 	}
 
 		table td {
