@@ -1128,6 +1128,16 @@ input, select, textarea {
 			opacity: 0.25;
 		}
 
+		input[type="submit"].image,
+		input[type="reset"].image,
+		input[type="button"].image,
+		button.image,
+		.button.image {
+			font-size: 0.8rem;
+			height: 6rem;
+			line-height: 6rem;
+		}
+
 	input[type="submit"],
 	input[type="reset"],
 	input[type="button"],
