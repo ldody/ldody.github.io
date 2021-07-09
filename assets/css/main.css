@@ -1009,8 +1009,11 @@ input, select, textarea {
 			}
 
 		table.nobord {
-			border: 0;
+			border: none;
 		}
+			table.nobord tbody {
+				border: none;
+			}
 
 /* Button */
 
