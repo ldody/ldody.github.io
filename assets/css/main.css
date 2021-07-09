@@ -1014,13 +1014,17 @@ input, select, textarea {
 
 		table.nobord {
 			border: none;
+			cellspacing: none;
 		}
 			table.nobord tbody tr {
 				border: none;
+				cellspacing: none;
 			}
+
 			table.nobord tbody td {
 				border: none;
 				vertical-align: middle;
+				cellspacing: none;
 			}
 
 /* Button */
