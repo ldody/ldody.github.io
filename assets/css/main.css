@@ -1011,21 +1011,6 @@ input, select, textarea {
 		table.nobord {
 			border: 0;
 		}
-			table.nobord tbody tr td {
-				border: solid 1px #ccc;
-			}
-
-			table.nobord thead {
-				border: 0;
-			}
-
-			table.nobord tfoot {
-				border: 0;
-			}
-
-			table.nobord thead tr th {
-				border: 0;
-			}
 
 /* Button */
 
