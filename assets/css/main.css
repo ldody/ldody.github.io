@@ -1016,17 +1016,14 @@ input, select, textarea {
 
 		table.nobord {
 			border: none;
-			padding: 0;
 		}
 			table.nobord tbody tr {
 				border: none;
-				padding: 0;
 			}
 
 			table.nobord tbody td {
 				border: none;
 				vertical-align: middle;
-				padding: 0;
 			}
 
 /* Button */
