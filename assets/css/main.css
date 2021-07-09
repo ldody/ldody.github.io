@@ -1009,6 +1009,7 @@ input, select, textarea {
 			}
 
 		table.nobord {
+			border: 0;
 		}
 			table.nobord tbody tr td {
 				border: solid 1px #ccc;
