@@ -1012,8 +1012,6 @@ input, select, textarea {
 		}
 			table.nobord tbody tr td {
 				border: solid 1px #ccc;
-				border-left-width: 0;
-				border-top-width: 0;
 			}
 
 			table.nobord thead {
@@ -1021,15 +1019,11 @@ input, select, textarea {
 			}
 
 			table.nobord tfoot {
-				border-top: 0;
+				border: 0;
 			}
 
 			table.nobord thead tr th {
 				border: 0;
-			}
-			
-			table.nobord tbody tr td {
-				border: 1px solid #ccc;
 			}
 
 /* Button */
