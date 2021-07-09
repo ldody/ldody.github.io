@@ -188,7 +188,7 @@ input, select, textarea {
 			text-decoration: none;
 		}
 
-		h1.major, h2.major, h3.major, h4.major, h5.major, h6.major {
+		h1.major, h3.major, h4.major, h5.major, h6.major {
 			border-bottom: solid 1px #ffffff;
 			width: -moz-max-content;
 			width: -webkit-max-content;
@@ -196,7 +196,17 @@ input, select, textarea {
 			width: max-content;
 			padding-bottom: 0.5rem;
 			margin: 0 0 2rem 0;
-			text-align:center;
+		}
+
+		h2.major {
+			border-bottom: solid 1px #ffffff;
+			width: -moz-max-content;
+			width: -webkit-max-content;
+			width: -ms-max-content;
+			width: max-content;
+			padding-bottom: 0.5rem;
+			margin: 0 0 2rem 0;
+			text-align: center;
 		}
 
 	h1 {
@@ -946,11 +956,11 @@ input, select, textarea {
 			border-left: 0;
 			border-right: 0;
 		}
-
+/*
 			table tbody tr:nth-child(2n + 1) {
 				background-color: rgba(255, 255, 255, 0.075);
 			}
-
+*/
 		table td {
 			padding: 0.75em 0.75em;
 		}
@@ -999,6 +1009,20 @@ input, select, textarea {
 
 		table.nobord {
 		}
+			table.nobord tbody tr td {
+				border: solid 1px #ccc;
+				border-left-width: 0;
+				border-top-width: 0;
+			}
+
+			table.nobord thead {
+				border: 0;
+			}
+
+			table.nobord tfoot {
+				border-top: 0;
+			}
+
 			table.nobord thead tr th {
 				border: 0;
 			}
