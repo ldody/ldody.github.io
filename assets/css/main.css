@@ -1011,7 +1011,10 @@ input, select, textarea {
 		table.nobord {
 			border: none;
 		}
-			table.nobord tbody {
+			table.nobord tbody tr {
+				border: none;
+			}
+			table.nobord tbody td {
 				border: none;
 			}
 
