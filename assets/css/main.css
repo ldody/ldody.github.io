@@ -196,6 +196,7 @@ input, select, textarea {
 			width: max-content;
 			padding-bottom: 0.5rem;
 			margin: 0 0 2rem 0;
+			text-align:center;
 		}
 
 	h1 {
@@ -994,6 +995,16 @@ input, select, textarea {
 
 			table.alt tfoot {
 				border-top: 0;
+			}
+
+		table.nobord {
+		}
+			table.nobord thead tr th {
+				border: 0;
+			}
+			
+			table.nobord tbody tr td {
+				border: 1px solid #ccc;
 			}
 
 /* Button */
