@@ -1024,7 +1024,7 @@ input, select, textarea {
 			table.nobord tbody td {
 				border: none;
 				vertical-align: middle;
-				padding: 0.75em 0.75em;
+				/*padding: 0.75em 0.75em;*/
 			}
 
 /* Button */
