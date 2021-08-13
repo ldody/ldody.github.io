@@ -1210,6 +1210,11 @@ input, select, textarea {
 			background-size: cover;
 		}
 		
+		#img_UOL {
+			background: url("../../images/UOL.png") no-repeat;
+			background-size: cover;
+		}
+		
 		#img_IAE {
 			background: url("../../images/IAE.png") no-repeat;
 			background-size: cover;
