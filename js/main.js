@@ -8,17 +8,23 @@ let lastFrameTime = 0;
 const targetFrameDuration = 1000 / 30;
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
-function resizeCanvas() {
+function resizeCanvas(resetPoints = false) {
     if (!canvas || !context) {
         return;
     }
 
+    const oldWidth = Number(canvas.dataset.cssWidth) || innerWidth;
+    const oldHeight = Number(canvas.dataset.cssHeight) || innerHeight;
+    const newWidth = innerWidth;
+    const newHeight = innerHeight;
     const pixelRatio = Math.min(devicePixelRatio || 1, 2);
 
-    canvas.width = innerWidth * pixelRatio;
-    canvas.height = innerHeight * pixelRatio;
-    canvas.style.width = innerWidth + "px";
-    canvas.style.height = innerHeight + "px";
+    canvas.width = newWidth * pixelRatio;
+    canvas.height = newHeight * pixelRatio;
+    canvas.style.width = newWidth + "px";
+    canvas.style.height = newHeight + "px";
+    canvas.dataset.cssWidth = newWidth;
+    canvas.dataset.cssHeight = newHeight;
 
     context.setTransform(
         pixelRatio,
@@ -29,15 +35,27 @@ function resizeCanvas() {
         0
     );
 
-    points = Array.from(
-        { length: Math.min(42, Math.floor(innerWidth / 30)) },
-        () => ({
-            x: Math.random() * innerWidth,
-            y: Math.random() * innerHeight,
-            vx: (Math.random() - 0.5) * 0.08,
-            vy: (Math.random() - 0.5) * 0.08,
-        })
-    );
+    if (resetPoints || points.length === 0) {
+        points = Array.from(
+            { length: Math.min(42, Math.floor(newWidth / 30)) },
+            () => ({
+                x: Math.random() * newWidth,
+                y: Math.random() * newHeight,
+                vx: (Math.random() - 0.5) * 0.08,
+                vy: (Math.random() - 0.5) * 0.08,
+            })
+        );
+
+        return;
+    }
+
+    const scaleX = oldWidth > 0 ? newWidth / oldWidth : 1;
+    const scaleY = oldHeight > 0 ? newHeight / oldHeight : 1;
+
+    for (const point of points) {
+        point.x *= scaleX;
+        point.y *= scaleY;
+    }
 }
 
 function renderNetwork(movePoints = true) {
@@ -144,5 +162,5 @@ addEventListener("resize", () => {
 document.addEventListener("visibilitychange", handleVisibilityChange);
 reducedMotion.addEventListener("change", handleReducedMotionChange);
 
-resizeCanvas();
+resizeCanvas(true);
 startNetwork();
