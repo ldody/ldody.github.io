@@ -29,7 +29,7 @@ body {
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
     min-height:100vh
 }
 
@@ -207,7 +207,7 @@ h1 {
 }
 
 .kicker {
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono","Courier New",monospace;
+    font-family:"JetBrains Mono",monospace;
     color:var(--accent);
     font-size:.78rem;
     letter-spacing:.12em
@@ -346,7 +346,7 @@ h1 {
 }
 
 .card .num {
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono","Courier New",monospace;
+    font-family:"JetBrains Mono",monospace;
     color:var(--accent);
     font-size:.72rem
 }
@@ -402,7 +402,7 @@ h1 {
 }
 
 .item .when {
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono","Courier New",monospace;
+    font-family:"JetBrains Mono",monospace;
     color:var(--accent);
     font-size:.74rem
 }
@@ -440,7 +440,7 @@ h1 {
 }
 
 .status {
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono","Courier New",monospace;
+    font-family:"JetBrains Mono",monospace;
     font-size:.69rem;
     color:var(--accent);
     letter-spacing:.08em
@@ -572,3 +572,32 @@ footer {
     stroke-linejoin: round;
 }
 
+/* Smooth page entrance.
+   Only the main content moves: the background and top navigation remain visually stable. */
+main {
+    animation: page-enter 240ms cubic-bezier(.22, .61, .36, 1) both;
+    will-change: opacity;
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    main {
+        animation: none;
+    }
+}
+
+/* Internal SPA-style navigation: the canvas/background stay alive and only
+   .wrap is replaced. Do not replay the page-load fade after each click. */
+html.spa-navigation main {
+    animation: none;
+    will-change: auto;
+}
