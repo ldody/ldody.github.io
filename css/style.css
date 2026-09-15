@@ -594,3 +594,10 @@ main {
         animation: none;
     }
 }
+
+/* Internal SPA-style navigation: the canvas/background stay alive and only
+   .wrap is replaced. Do not replay the page-load fade after each click. */
+html.spa-navigation main {
+    animation: none;
+    will-change: auto;
+}

@@ -164,3 +164,201 @@ reducedMotion.addEventListener("change", handleReducedMotionChange);
 
 resizeCanvas(true);
 startNetwork();
+
+// -----------------------------------------------------------------------------
+// Fast internal navigation
+// Keeps the current document (and therefore the animated canvas) alive while
+// replacing only the page shell contained in .wrap.
+// -----------------------------------------------------------------------------
+const pageCache = new Map();
+const prefetchedPages = [
+    "index.html",
+    "about.html",
+    "skills.html",
+    "experience.html",
+    "projects.html",
+    "publications.html",
+];
+
+function normalizePageUrl(url) {
+    const parsed = new URL(url, location.href);
+
+    if (parsed.origin !== location.origin) {
+        return null;
+    }
+
+    if (!parsed.pathname.endsWith(".html") && !parsed.pathname.endsWith("/")) {
+        return null;
+    }
+
+    parsed.hash = "";
+    return parsed;
+}
+
+async function loadPage(url) {
+    const normalized = normalizePageUrl(url);
+    if (!normalized) {
+        return null;
+    }
+
+    const key = normalized.href;
+    if (pageCache.has(key)) {
+        return pageCache.get(key);
+    }
+
+    const request = fetch(key, { credentials: "same-origin" })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Unable to load ${normalized.pathname}`);
+            }
+            return response.text();
+        })
+        .then((html) => {
+            const documentCopy = new DOMParser().parseFromString(html, "text/html");
+            const wrap = documentCopy.querySelector(".wrap");
+
+            if (!wrap) {
+                throw new Error(`Missing .wrap in ${normalized.pathname}`);
+            }
+
+            return {
+                title: documentCopy.title,
+                wrapHTML: wrap.innerHTML,
+                pageStyles: Array.from(documentCopy.head.querySelectorAll("style"))
+                    .map((style) => style.textContent)
+                    .join("\n"),
+            };
+        });
+
+    pageCache.set(key, request);
+
+    try {
+        return await request;
+    } catch (error) {
+        pageCache.delete(key);
+        throw error;
+    }
+}
+
+function applyPageStyles(cssText) {
+    let style = document.getElementById("dynamic-page-style");
+
+    if (!cssText) {
+        style?.remove();
+        return;
+    }
+
+    if (!style) {
+        style = document.createElement("style");
+        style.id = "dynamic-page-style";
+        document.head.appendChild(style);
+    }
+
+    style.textContent = cssText;
+}
+
+async function navigateTo(url, { push = true } = {}) {
+    const normalized = normalizePageUrl(url);
+    if (!normalized) {
+        location.href = url;
+        return;
+    }
+
+    try {
+        const page = await loadPage(normalized.href);
+        const wrap = document.querySelector(".wrap");
+
+        if (!page || !wrap) {
+            location.href = normalized.href;
+            return;
+        }
+
+        // Mark SPA updates so CSS can avoid replaying the initial page-load fade.
+        document.documentElement.classList.add("spa-navigation");
+        wrap.innerHTML = page.wrapHTML;
+        applyPageStyles(page.pageStyles);
+        document.title = page.title;
+
+        if (push) {
+            history.pushState({ spa: true }, "", normalized.href);
+        }
+
+        scrollTo({ top: 0, left: 0, behavior: "instant" });
+    } catch (error) {
+        console.error(error);
+        location.href = normalized.href;
+    }
+}
+
+function getInternalNavigationLink(target) {
+    const link = target.closest("a[href]");
+    if (!link) {
+        return null;
+    }
+
+    if (
+        link.target === "_blank" ||
+        link.hasAttribute("download") ||
+        link.href.startsWith("mailto:") ||
+        link.href.startsWith("tel:") ||
+        link.href.startsWith("javascript:")
+    ) {
+        return null;
+    }
+
+    return normalizePageUrl(link.href) ? link : null;
+}
+
+document.addEventListener("click", (event) => {
+    if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+    ) {
+        return;
+    }
+
+    const link = getInternalNavigationLink(event.target);
+    if (!link) {
+        return;
+    }
+
+    event.preventDefault();
+    navigateTo(link.href);
+});
+
+// Preload as soon as a user shows intent to open a page.
+document.addEventListener("pointerover", (event) => {
+    const link = getInternalNavigationLink(event.target);
+    if (link) {
+        loadPage(link.href).catch(() => {});
+    }
+});
+
+document.addEventListener("touchstart", (event) => {
+    const link = getInternalNavigationLink(event.target);
+    if (link) {
+        loadPage(link.href).catch(() => {});
+    }
+}, { passive: true });
+
+window.addEventListener("popstate", () => {
+    navigateTo(location.href, { push: false });
+});
+
+// Warm the small portfolio in idle time. Navigation still works normally if
+// the browser decides not to run this before the first click.
+const preloadPortfolio = () => {
+    for (const page of prefetchedPages) {
+        loadPage(new URL(page, location.href).href).catch(() => {});
+    }
+};
+
+if ("requestIdleCallback" in window) {
+    requestIdleCallback(preloadPortfolio, { timeout: 1500 });
+} else {
+    setTimeout(preloadPortfolio, 250);
+}
