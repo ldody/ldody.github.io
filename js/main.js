@@ -1,25 +1,36 @@
 const canvas = document.getElementById("network");
-const context = canvas.getContext("2d");
+const context = canvas ? canvas.getContext("2d") : null;
 
 let points = [];
+let animationFrame = null;
+let lastFrameTime = 0;
+
+const targetFrameDuration = 1000 / 30;
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
 function resizeCanvas() {
-    canvas.width = innerWidth * devicePixelRatio;
-    canvas.height = innerHeight * devicePixelRatio;
+    if (!canvas || !context) {
+        return;
+    }
+
+    const pixelRatio = Math.min(devicePixelRatio || 1, 2);
+
+    canvas.width = innerWidth * pixelRatio;
+    canvas.height = innerHeight * pixelRatio;
     canvas.style.width = innerWidth + "px";
     canvas.style.height = innerHeight + "px";
 
     context.setTransform(
-        devicePixelRatio,
+        pixelRatio,
         0,
         0,
-        devicePixelRatio,
+        pixelRatio,
         0,
         0
     );
 
     points = Array.from(
-        { length: Math.min(55, Math.floor(innerWidth / 24)) },
+        { length: Math.min(42, Math.floor(innerWidth / 30)) },
         () => ({
             x: Math.random() * innerWidth,
             y: Math.random() * innerHeight,
@@ -29,23 +40,29 @@ function resizeCanvas() {
     );
 }
 
-function drawNetwork() {
+function renderNetwork(movePoints = true) {
+    if (!canvas || !context) {
+        return;
+    }
+
     context.clearRect(0, 0, innerWidth, innerHeight);
 
     for (const point of points) {
-        point.x += point.vx;
-        point.y += point.vy;
+        if (movePoints) {
+            point.x += point.vx;
+            point.y += point.vy;
 
-        if (point.x < 0 || point.x > innerWidth) {
-            point.vx *= -1;
-        }
+            if (point.x < 0 || point.x > innerWidth) {
+                point.vx *= -1;
+            }
 
-        if (point.y < 0 || point.y > innerHeight) {
-            point.vy *= -1;
+            if (point.y < 0 || point.y > innerHeight) {
+                point.vy *= -1;
+            }
         }
 
         context.beginPath();
-        context.arc(point.x, point.y, 1.25, 0, 7);
+        context.arc(point.x, point.y, 1.25, 0, Math.PI * 2);
         context.fillStyle = "rgba(103, 215, 255, 0.22)";
         context.fill();
     }
@@ -54,12 +71,14 @@ function drawNetwork() {
         for (let j = i + 1; j < points.length; j++) {
             const pointA = points[i];
             const pointB = points[j];
-            const distance = Math.hypot(
-                pointA.x - pointB.x,
-                pointA.y - pointB.y
-            );
 
-            if (distance < 135) {
+            const dx = pointA.x - pointB.x;
+            const dy = pointA.y - pointB.y;
+            const distanceSquared = dx * dx + dy * dy;
+
+            if (distanceSquared < 18225) {
+                const distance = Math.sqrt(distanceSquared);
+
                 context.beginPath();
                 context.moveTo(pointA.x, pointA.y);
                 context.lineTo(pointB.x, pointB.y);
@@ -70,15 +89,60 @@ function drawNetwork() {
             }
         }
     }
-
-    requestAnimationFrame(drawNetwork);
 }
 
-addEventListener("resize", resizeCanvas);
+function animateNetwork(timestamp) {
+    if (document.hidden || reducedMotion.matches) {
+        animationFrame = null;
+        return;
+    }
+
+    if (timestamp - lastFrameTime >= targetFrameDuration) {
+        lastFrameTime = timestamp;
+        renderNetwork(true);
+    }
+
+    animationFrame = requestAnimationFrame(animateNetwork);
+}
+
+function startNetwork() {
+    if (!canvas || !context) {
+        return;
+    }
+
+    if (animationFrame !== null) {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+    }
+
+    if (reducedMotion.matches) {
+        renderNetwork(false);
+        return;
+    }
+
+    animationFrame = requestAnimationFrame(animateNetwork);
+}
+
+function handleVisibilityChange() {
+    if (!document.hidden) {
+        startNetwork();
+    }
+}
+
+function handleReducedMotionChange() {
+    startNetwork();
+}
+
+addEventListener("resize", () => {
+    resizeCanvas();
+
+    if (reducedMotion.matches) {
+        renderNetwork(false);
+    }
+});
+
+document.addEventListener("visibilitychange", handleVisibilityChange);
+reducedMotion.addEventListener("change", handleReducedMotionChange);
+
 resizeCanvas();
-
-if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    drawNetwork();
-} else {
-    drawNetwork();
-}
+startNetwork();
