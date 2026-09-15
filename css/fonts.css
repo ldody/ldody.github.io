@@ -1,0 +1,93 @@
+/*
+  Self-hosted fonts (replaces the Google Fonts <link> tags).
+
+  WHY: loading fonts from fonts.googleapis.com means the browser has to do
+  a full extra round trip (googleapis.com -> gstatic.com) before the font
+  file even starts downloading. Serving the files ourselves removes that
+  hop entirely, and lets us control exactly how the swap behaves.
+
+  SETUP (one-time): download the woff2 files below and drop them in
+  assets/webfonts/inter/ and assets/webfonts/jetbrains-mono/ with these
+  exact names. See assets/webfonts/README.md for the two-minute steps.
+*/
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url("../assets/webfonts/inter/inter-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url("../assets/webfonts/inter/inter-500.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: optional;
+    src: url("../assets/webfonts/inter/inter-600.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: optional;
+    src: url("../assets/webfonts/inter/inter-700.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url("../assets/webfonts/jetbrains-mono/jetbrains-mono-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url("../assets/webfonts/jetbrains-mono/jetbrains-mono-500.woff2") format("woff2");
+}
+
+/*
+  Metric-matched fallbacks (fix #2).
+
+  These aren't real fonts - they're the system font (Arial / Courier New)
+  with its box resized via ascent/descent/size-adjust to match Inter's and
+  JetBrains Mono's own metrics almost exactly. The browser renders this
+  fallback in the first frame, and because it takes up the same vertical
+  space and roughly the same width as the real font, nothing visibly moves
+  even in the rare case the real font arrives late and swaps in.
+
+  Metrics: Inter values are the ones published by Inter's own maintainer
+  (github.com/rsms/inter, discussion #632). JetBrains Mono values are
+  measured from the shipped woff2 metrics.
+*/
+
+@font-face {
+    font-family: "Inter Fallback";
+    src: local("Arial");
+    ascent-override: 90.20%;
+    descent-override: 22.48%;
+    line-gap-override: 0%;
+    size-adjust: 107.40%;
+}
+
+@font-face {
+    font-family: "JetBrains Mono Fallback";
+    src: local("Courier New");
+    ascent-override: 102%;
+    descent-override: 30%;
+    line-gap-override: 0%;
+    size-adjust: 110%;
+}
