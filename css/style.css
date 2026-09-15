@@ -512,3 +512,55 @@ footer {
         transition:none
     }
 }
+
+
+/* AI / finance mark used on the home page */
+.ai-finance-mark {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(7, 16, 25, .72);
+    box-shadow: 0 0 45px rgba(103, 215, 255, .08);
+}
+
+.ai-finance-mark svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.mark-ring {
+    fill: none;
+    stroke: rgba(103, 215, 255, .28);
+    stroke-width: 1.2;
+}
+
+.mark-link {
+    fill: none;
+    stroke: rgba(103, 215, 255, .42);
+    stroke-width: 1.4;
+}
+
+.mark-link.faint {
+    stroke: rgba(103, 215, 255, .18);
+}
+
+.mark-node {
+    fill: var(--accent);
+    filter: drop-shadow(0 0 5px rgba(103, 215, 255, .55));
+}
+
+.mark-node.secondary {
+    fill: rgba(103, 215, 255, .55);
+}
+
+.mark-chart {
+    fill: none;
+    stroke: rgba(255, 255, 255, .88);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

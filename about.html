@@ -3,14 +3,50 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="Léo Dody — Quantitative Research and Financial Machine Learning" name="description"/>
+  <meta content="L&eacute;o Dody &mdash; Quantitative Research and Financial Machine Learning" name="description"/>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
   <link href="css/style.css" rel="stylesheet"/>
+  <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
   <title>
-   About — Léo Dody
+   About &mdash; L&eacute;o Dody
   </title>
+  <style>
+   .about-centered {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.about-centered .copy {
+    width: min(100%, 900px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-centered .copy p {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 820px;
+}
+
+.about-centered .links {
+    justify-content: center;
+    margin-top: 32px;
+}
+
+@media (max-width: 700px) {
+    .about-centered .copy {
+        width: 100%;
+        text-align: left;
+    }
+
+    .about-centered .links {
+        justify-content: flex-start;
+    }
+}
+  </style>
  </head>
  <body>
   <canvas id="network">
@@ -22,13 +58,13 @@
   <div class="wrap">
    <header class="topbar">
     <a class="logo" href="index.html">
-     LÉO
+     L&Eacute;O
      <b>
       DODY
      </b>
     </a>
     <a class="back" href="index.html">
-     ← Home
+     &larr; Home
     </a>
    </header>
    <main class="page">
@@ -40,35 +76,45 @@
       About
      </h1>
     </div>
-    <div class="about">
-     <img alt="Léo Dody" src="assets/images/profile.jpg"/>
+    <div class="about about-centered">
      <div class="copy">
       <p>
-       Quantitative researcher working at the intersection of financial machine learning, market microstructure, deep learning and reinforcement learning.
+       Quantitative researcher and PhD candidate in AI and Financial Markets, working at the intersection of financial machine learning, market microstructure, deep learning and reinforcement learning.
       </p>
       <p>
-       My research focuses on extracting information from financial data and integrating predictive models into quantitative decision-making systems.
+       My research focuses on high-frequency financial data, market forecasting, liquidity modelling and portfolio decision-making. I develop end-to-end quantitative research pipelines, from data processing and feature engineering to model training, validation and backtesting. My research experience spans France and Japan, including a visiting research fellowship at Keio University focused on AI, reinforcement learning and portfolio optimization.
+      </p>
+      <p>
+       Originally trained as a mechanical engineer, with a specialization in fluid mechanics and energetics, I progressively moved toward artificial intelligence and quantitative finance. I also hold a degree in business management, giving me a multidisciplinary background spanning engineering, AI, finance and management.
+      </p>
+      <p>
+       Alongside my research, I have taught financial market microstructure at university level to both Bachelor's and Master's students.
       </p>
       <div class="links">
        <a class="button" href="https://github.com/ldody" target="_blank">
-        GitHub ↗
+        GitHub &nearrow;
        </a>
        <a class="button" href="https://www.linkedin.com/in/leo-dody/?locale=en_US" target="_blank">
-        LinkedIn ↗
+        LinkedIn &nearrow;
        </a>
        <a class="button" href="assets/cv/CV_DODY_LEO.pdf" target="_blank">
-        CV ↗
+        CV &nearrow;
+       </a>
+       <a class="button" href="https://scholar.google.com/citations?user=cvJrXQkAAAAJ&amp;hl=fr&amp;oi=ao" target="_blank">
+        Scholar &nearrow;
+       </a>
+       <a class="button" href="https://orcid.org/0009-0006-7766-1749" target="_blank">
+        ORCID &nearrow;
        </a>
       </div>
      </div>
     </div>
    </main>
    <footer>
-    © 2026 Léo Dody
+    &copy; 2026 L&eacute;o Dody
    </footer>
   </div>
   <script src="js/main.js">
   </script>
  </body>
 </html>
-
