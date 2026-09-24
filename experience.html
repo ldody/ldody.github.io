@@ -1,131 +1,130 @@
 <!DOCTYPE html>
+
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="L&eacute;o Dody &mdash; Quantitative Research and Financial Machine Learning" name="description"/>
-  <link as="font" crossorigin="" href="assets/webfonts/inter/inter-400.woff2" rel="preload" type="font/woff2"/>
-  <link href="css/fonts.css" rel="stylesheet"/>
-  <link href="css/style.css" rel="stylesheet"/>
-  <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
-  <title>
-   Experience &mdash; L&eacute;o Dody
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Léo Dody — Quantitative Research and Financial Machine Learning" name="description"/>
+<link as="font" crossorigin="" href="assets/webfonts/inter/inter-400.woff2" rel="preload" type="font/woff2"/>
+<link href="css/fonts.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+<title>
+   Experience — Léo Dody
   </title>
- </head>
- <body>
-  <canvas id="network">
-  </canvas>
-  <div class="grid">
-  </div>
-  <div class="glow">
-  </div>
-  <div class="wrap">
-   <header class="topbar">
-    <a class="logo" href="index.html">
-     L&Eacute;O
+
+<style>
+/* Compact skills line + nested Keio mission inside Magellan. */
+.skills-line {
+    margin-top: 16px;
+    font-size: .88rem;
+    color: var(--muted);
+}
+.skills-line strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* Nested mission: part of the parent Magellan experience, not a separate timeline entry. */
+.subexperience {
+    margin: 28px 0 0 18px;
+    padding-left: 18px;
+    border-left: 1px solid var(--line);
+}
+.subexperience h3 {
+    margin: 7px 0 6px;
+    font-size: 1rem;
+    color: var(--text);
+}
+.subexperience p {
+    margin: 0;
+    color: var(--muted);
+}
+.subexperience ul {
+    margin-bottom: 0;
+}
+</style>
+</head>
+<body>
+<canvas id="network">
+</canvas>
+<div class="grid">
+</div>
+<div class="glow">
+</div>
+<div class="wrap">
+<header class="topbar">
+<a class="logo" href="index.html">
+     LÉO
      <b>
       DODY
      </b>
+</a>
+<a class="back" href="index.html">
+     ← Home
     </a>
-    <a class="back" href="index.html">
-     &larr; Home
-    </a>
-   </header>
-   <main class="page">
-    <div class="page-head">
-     <div class="kicker">
+</header>
+<main class="page">
+<div class="page-head">
+<div class="kicker">
       EXPERIENCE
      </div>
-     <h1>
+<h1>
       Experience
      </h1>
-    </div>
-    <div class="timeline">
-     <article class="item">
-      <span class="when">
-       OCT. 2023 &mdash; SEPT. 2026 &middot; LYON, FRANCE
-      </span>
-      <h2>
-       Quantitative Researcher &mdash; AI &amp; Financial Markets
-      </h2>
-      <p>
-       <strong>
-        Research Center Magellan
-       </strong>
-      </p>
-      <ul>
-       <li>
-        Conducted quantitative research at the intersection of machine learning, market microstructure and systematic trading.
-       </li>
-       <li>
-        Developed deep learning models for short-term financial forecasting using full Euronext limit order book data, including CNN, LSTM and hybrid architectures.
-       </li>
-       <li>
-        Reconstructed full order books and engineered 260+ market microstructure features describing liquidity, order flow and execution dynamics.
-       </li>
-       <li>
-        Developed liquidity-zone detection and prediction methods combining HDBSCAN clustering with CNN&ndash;GRU&ndash;Transformer architectures.
-       </li>
-       <li>
-        Designed multi-asset portfolio optimization frameworks combining Transformers and deep reinforcement learning (Soft Actor-Critic), including investment constraints derived from natural-language objectives.
-       </li>
-       <li>
-        Built scalable Python research pipelines for high-frequency data processing, hyperparameter optimization, sensitivity analysis, backtesting and out-of-sample validation on Linux HPC / Slurm infrastructure.
-       </li>
-      </ul>
-      <p class="experience-note">
-       Research conducted during this position resulted in three academic manuscripts covering market forecasting, liquidity modelling and objective-aware portfolio decision making.
-      </p>
-     </article>
-     <article class="item">
-      <span class="when">
-       APR. 2026 &mdash; JUN. 2026 &middot; YOKOHAMA, JAPAN
-      </span>
-      <h2>
-       Quantitative Research Fellow (Visiting) &mdash; AI &amp; Finance
-      </h2>
-      <p>
-       <strong>
-        Keio University
-       </strong>
-      </p>
-      <ul>
-       <li>
-        Conducted research on reinforcement learning for constraint-aware portfolio optimization.
-       </li>
-       <li>
-        Developed quantitative frameworks connecting natural-language investment objectives with portfolio allocation constraints.
-       </li>
-      </ul>
-     </article>
-     <article class="item">
-      <span class="when">
-       JUN. 2022 &mdash; DEC. 2022 &middot; LYON, FRANCE
-      </span>
-      <h2>
-       Associate &mdash; IT Audit &amp; Risk Management
-      </h2>
-      <p>
-       <strong>
-        PwC
-       </strong>
-      </p>
-      <ul>
-       <li>
-        Assessed complex IT environments, infrastructure and information-system controls across access management, cybersecurity, data security and IT operations.
-       </li>
-       <li>
-        Worked with enterprise environments including Linux, Windows, AWS, Azure, Oracle, SQL Server and Microsoft Dynamics.
-       </li>
-      </ul>
-     </article>
-    </div>
-   </main>
-   <footer>
-    &copy; 2026 L&eacute;o Dody
+</div>
+<div class="timeline">
+<article class="item">
+<span class="when">OCT. 2023 — SEPT. 2026 · LYON, FRANCE</span>
+<h2>Quantitative Researcher in AI and Finance</h2>
+<p><strong>Research Center Magellan</strong></p>
+<ul>
+<li>Designed end-to-end data science pipelines for high-frequency, multivariate time-series data, processing ~2B observations per dataset.</li>
+<li>Engineered 260+ predictive features capturing temporal patterns, interactions and complex system dynamics, including market microstructure, liquidity and order-flow information.</li>
+<li>Developed deep-learning and machine-learning models for short-term forecasting, achieving up to 52% out-of-sample directional accuracy on noisy time-series data.</li>
+<li>Built scalable experimentation pipelines for model training, hyperparameter optimization, sensitivity analysis and out-of-sample validation on Linux HPC / Slurm infrastructure.</li>
+<li>Designed and taught graduate-level finance courses and communicated technical results to non-specialist audiences.</li>
+</ul>
+<p class="skills-line"><strong>Skills developed:</strong> Quantitative Research · Deep Learning · Time-Series Analysis · Feature Engineering · HPC / Slurm</p>
+<div class="subexperience">
+<span class="when">APR. 2026 — JUN. 2026 · YOKOHAMA, JAPAN</span>
+<h3>Quantitative Researcher — Visiting Research Mission</h3>
+<p><strong>Keio University</strong></p>
+<ul>
+<li>Developed reinforcement learning methods for constrained sequential decision-making and optimization, with applications to portfolio allocation.</li>
+<li>Designed quantitative frameworks translating natural-language investment guidelines into mathematical constraints for optimization algorithms.</li>
+</ul>
+<p class="skills-line"><strong>Skills developed:</strong> Reinforcement Learning · Constrained Optimization · Mathematical Modelling</p>
+</div>
+</article>
+<article class="item">
+<span class="when">JUN. 2022 — DEC. 2022 · LYON, FRANCE</span>
+<h2>Associate IT Auditor</h2>
+<p><strong>PwC</strong></p>
+<ul>
+<li>Conducted IT audits of client information systems, assessing controls across access management, cybersecurity, data security and IT operations.</li>
+<li>Evaluated IT infrastructure and control risks while collaborating with client IT teams and business stakeholders to gather evidence and communicate findings.</li>
+</ul>
+<p class="skills-line"><strong>Skills developed:</strong> IT Audit · Cybersecurity · Risk Assessment · Stakeholder Communication</p>
+</article>
+<article class="item">
+<span class="when">MAR. 2021 — AUG. 2021 · LYON, FRANCE</span>
+<h2>Mechanical Engineering Intern</h2>
+<p><strong>Framatome</strong></p>
+<ul>
+<li>Automated 100,000+ large-scale simulations and processed 100k+ deformation data points on HPC servers using Python.</li>
+<li>Performed global sensitivity analysis across 25+ parameters using polynomial chaos methods.</li>
+<li>Strengthened risk evaluation processes, reducing deformation-related safety risks by 52% of fuel assemblies.</li>
+</ul>
+<p class="skills-line"><strong>Skills developed:</strong> Python · HPC · Large-Scale Simulation · Sensitivity Analysis · Risk Modelling</p>
+</article>
+</div>
+</main>
+<footer>
+    © 2026 Léo Dody
    </footer>
-  </div>
-  <script src="js/main.js">
-  </script>
- </body>
+</div>
+<script src="js/main.js">
+</script>
+</body>
 </html>

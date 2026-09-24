@@ -75,7 +75,13 @@ a {
     display:flex;
     align-items:center;
     justify-content:space-between;
-    border-bottom:1px solid var(--line)
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(7,16,25,.38);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px)
 }
 
 .logo {
